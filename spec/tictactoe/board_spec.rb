@@ -76,6 +76,24 @@ describe TicTacToe::Board do
     expect(board.total_moves_made).to eq(2)
   end
 
+  it 'move is valid when in range' do
+    expect(board.move_valid?(0)).to eq(true)
+    expect(board.move_valid?(TicTacToe::Board::BOARD_SIZE - 1)).to eq(true)
+  end
+
+  it 'move is invalid when move is below zero' do
+    expect(board.move_valid?(-1)).to eq(false)
+  end
+
+  it 'move is invalid when move exceeds board size' do
+    expect(board.move_valid?(TicTacToe::Board::BOARD_SIZE)).to eq(false)
+  end
+
+  it 'move is invalid when move is occupied' do
+    board.add_move('X', 1)
+    expect(board.move_valid?(1)).to eq(false)
+  end
+
   def add_moves_to_board(board, moves, mark)
     moves.each do |move|
       board.add_move(mark, move)

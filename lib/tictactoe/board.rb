@@ -12,6 +12,10 @@ module TicTacToe
       positions[position] = mark
     end
 
+    def move_valid?(position)
+      position_within_board_range(position) and position_is_empty?(position)
+    end
+
     def won?
       winning_line_exists?
     end
@@ -72,6 +76,14 @@ module TicTacToe
 
     def board_full?
       positions.none? { |position| position.nil? }
+    end
+
+    def position_within_board_range(position)
+      position >= 0 and position < BOARD_SIZE
+    end
+
+    def position_is_empty?(position)
+      positions[position].nil?
     end
 
     attr_reader :positions
