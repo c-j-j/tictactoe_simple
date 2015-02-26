@@ -1,0 +1,13 @@
+#!/usr/bin/env ruby
+
+$:<< File.join(File.dirname(__FILE__), '../lib')
+require 'tictactoe/ui/command_line/command_line_interface'
+require 'tictactoe/board'
+require 'tictactoe/game'
+require 'tictactoe/ui/command_line/human_player'
+
+user_interface = TicTacToe::UI::CommandLine::CommandLineInterface.new
+board = TicTacToe::Board.new
+player_1 = TicTacToe::UI::CommandLine::HumanPlayer.new('X')
+player_2 = TicTacToe::UI::CommandLine::HumanPlayer.new('O')
+TicTacToe::Game.new(user_interface, board, player_1, player_2).play

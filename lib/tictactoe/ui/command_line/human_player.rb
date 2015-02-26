@@ -5,7 +5,10 @@ module TicTacToe
 
         INVALID_MOVE_ERROR = "Error: Invalid Move"
 
-        def initialize(user_interface)
+        attr_reader :mark
+
+        def initialize(mark, user_interface = CommandLineInterface.new)
+          @mark = mark
           @user_interface = user_interface
         end
 

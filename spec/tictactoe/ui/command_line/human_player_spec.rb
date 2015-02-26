@@ -4,7 +4,7 @@ require 'tictactoe/stubs/stub_interface'
 
 describe TicTacToe::UI::CommandLine::HumanPlayer do
   let(:stub_interface) { TicTacToe::Stubs::StubInterface.new }
-  let(:human_player) { TicTacToe::UI::CommandLine::HumanPlayer.new(stub_interface) }
+  let(:human_player) { TicTacToe::UI::CommandLine::HumanPlayer.new('X', stub_interface) }
   let(:board) { TicTacToe::Board.new }
 
   it 'gets move from user input' do
@@ -21,5 +21,9 @@ describe TicTacToe::UI::CommandLine::HumanPlayer do
     stub_interface.prepare_user_moves(-1, 0)
     human_player.next_move(board)
     expect(stub_interface.error_message_printed?).to eq(true)
+  end
+
+  it' has a mark' do
+    expect(human_player.mark).to eq('X')
   end
 end

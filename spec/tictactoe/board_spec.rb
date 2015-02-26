@@ -119,4 +119,15 @@ describe TicTacToe::Board do
     board_helper.add_moves_to_board(board, [0, 4, 8], 'X')
     expect(board.winner).to eq('X')
   end
+
+  it 'transforms positions to rows' do
+    board_helper.populate_board_with_tie(board, 'X', 'O')
+    index = 0
+    board.rows.each do|row|
+      row.each do |cell|
+        expect(board.get_mark_at_position(index)).to eq(cell)
+        index += 1
+      end
+    end
+  end
 end

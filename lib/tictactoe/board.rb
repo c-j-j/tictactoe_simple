@@ -45,6 +45,10 @@ module TicTacToe
       (0...BOARD_SIZE).select {|index| positions[index].nil?}
     end
 
+    def rows
+      positions.each_slice(ROW_SIZE).to_a
+    end
+
     private
 
     def winning_line_exists?
@@ -65,10 +69,6 @@ module TicTacToe
 
     def cols
       rows.transpose
-    end
-
-    def rows
-      positions.each_slice(ROW_SIZE).to_a
     end
 
     def diagonals

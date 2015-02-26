@@ -8,12 +8,12 @@ module TicTacToe
         @mark = mark
       end
 
-      def prepare_next_move(next_move)
+      def prepare_next_move(*next_move)
         @next_move = next_move
       end
 
       def next_move(board)
-        return @next_move
+        return @next_move.shift
       end
     end
   end
