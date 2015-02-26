@@ -19,7 +19,7 @@ describe TicTacToe::UI::CommandLine::HumanPlayer do
 
   it 'prints error message when invalid user input provided' do
     stub_interface.prepare_user_moves(-1, 0)
-    expect(human_player.next_move(board)).to eq(0)
+    human_player.next_move(board)
     expect(stub_interface.error_message_printed?).to eq(true)
   end
 end

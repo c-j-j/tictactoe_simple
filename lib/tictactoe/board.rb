@@ -4,8 +4,12 @@ module TicTacToe
     BOARD_SIZE = 9
     ROW_SIZE = 3
 
-    def initialize
-      @positions = Array.new(BOARD_SIZE)
+    def initialize(positions = nil)
+      @positions = positions || Array.new(BOARD_SIZE)
+    end
+
+    def copy
+      Board.new(positions.dup)
     end
 
     def add_move(mark, position)
@@ -20,6 +24,11 @@ module TicTacToe
       winning_line_exists?
     end
 
+    def winner
+      winning_line = find_winning_line(winning_lines)
+      return winning_line[0] unless winning_line.nil?
+    end
+
     def draw?
       !winning_line_exists? && board_full?
     end
@@ -30,6 +39,10 @@ module TicTacToe
 
     def total_moves_made
       positions.count{ |position| !position.nil? }
+    end
+
+    def empty_positions
+      (0...BOARD_SIZE).select {|index| positions[index].nil?}
     end
 
     private
