@@ -5,7 +5,7 @@ require 'tictactoe/stubs/stub_player'
 require 'tictactoe/helpers/board_helper'
 
 describe TicTacToe::Game do
-  let(:user_interface) { instance_double("TicTacToe::UI::CommandLine::CommandLineInterface", :print_update => nil) }
+  let(:user_interface) { instance_double("TicTacToe::UI::CommandLine::UserInterface", :print_update => nil) }
   let(:board_helper) { TicTacToe::TestHelpers::BoardHelper.new }
   let(:player_1) { TicTacToe::Stubs::StubPlayer.new('X') }
   let(:player_2) { TicTacToe::Stubs::StubPlayer.new('O') }
@@ -54,7 +54,7 @@ describe TicTacToe::Game do
     player_1.prepare_next_move(2)
     expect(user_interface)
       .to receive(:print_update)
-      .twice
+      .at_least(:twice)
       .with(game)
     game.play
   end

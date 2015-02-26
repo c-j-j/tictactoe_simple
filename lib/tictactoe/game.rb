@@ -1,7 +1,7 @@
 module TicTacToe
   class Game
 
-    attr_reader :board
+    attr_reader :board, :player_1, :player_2
 
     def initialize(user_interface, board, player_1, player_2)
       @user_interface = user_interface
@@ -54,7 +54,7 @@ module TicTacToe
       end
     end
 
-    attr_reader :player_1, :player_2, :user_interface
+    attr_reader :user_interface
 
   end
 end

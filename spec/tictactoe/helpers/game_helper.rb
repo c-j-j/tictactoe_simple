@@ -21,10 +21,9 @@ module TicTacToe
 
       def self.won_game
         player_1 = new_player('X')
-        player_2 = new_player('O')
         board = new_board
         board_helper.populate_board_with_win(board, player_1.mark)
-        TicTacToe::Game.new(nil, board, player_1, player_2)
+        TicTacToe::Game.new(nil, board, player_1, new_player('O'))
       end
 
       def self.board_helper

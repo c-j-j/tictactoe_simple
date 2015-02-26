@@ -3,9 +3,13 @@ require 'tictactoe/ui/messages'
 module TicTacToe
   module UI
     module CommandLine
-      class CommandLineInterface
+      class UserInterface
 
         MARK_OFFSET = 1
+
+        HUMAN_PLAYER = "Human"
+        COMPUTER_PLAYER = "Computer"
+        PLAYER_TYPES = {1 => HUMAN_PLAYER, 2 => COMPUTER_PLAYER}
 
         def initialize(input=$stdin, output=$stdout)
           @input = input
@@ -19,6 +23,19 @@ module TicTacToe
 
         def get_move
           input.gets.to_i - MARK_OFFSET
+        end
+
+        def get_player_type(mark)
+          print(SELECT_PLAYER_TYPE % mark)
+
+          PLAYER_TYPES.each do |option, player_type|
+            print("#{option}: #{player_type}")
+          end
+
+          while true
+            user_input = input.gets.to_i
+            return PLAYER_TYPES[user_input] if PLAYER_TYPES.has_key?(user_input)
+          end
         end
 
         def print_error_message(message)
@@ -48,10 +65,10 @@ module TicTacToe
         end
 
         def print_status(game)
-          game_state = game.state
-          if game_state == :draw
+          case game.state
+          when :draw
             print(TicTacToe::UI::DRAW_MESSAGE)
-          elsif game_state == :won
+          when :won
             print(TicTacToe::UI::WINNING_MESSAGE % game.winning_mark)
           else
             print(TicTacToe::UI::NEXT_PLAYER_TO_GO % game.current_player_mark)

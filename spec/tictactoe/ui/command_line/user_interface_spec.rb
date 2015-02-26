@@ -1,13 +1,13 @@
 require 'spec_helper'
-require 'tictactoe/ui/command_line/command_line_interface'
+require 'tictactoe/ui/command_line/user_interface'
 require 'tictactoe/helpers/game_helper'
 require 'tictactoe/ui/messages'
 
-describe TicTacToe::UI::CommandLine::CommandLineInterface do
+describe TicTacToe::UI::CommandLine::UserInterface do
 
   let(:input) { StringIO.new }
   let(:output) { StringIO.new }
-  let(:interface) { TicTacToe::UI::CommandLine::CommandLineInterface.new(input, output)}
+  let(:interface) { TicTacToe::UI::CommandLine::UserInterface.new(input, output)}
 
   it 'update displays next player to go when game in progress' do
     game = TicTacToe::TestHelpers::GameHelper.new_game
@@ -52,5 +52,30 @@ describe TicTacToe::UI::CommandLine::CommandLineInterface do
   it 'prints out error message' do
     interface.print_error_message("error")
     expect(output.string).to include("error")
+  end
+
+  it 'user can select human player' do
+    input.string = "1"
+    expect(interface.get_player_type('X')).to eq(TicTacToe::UI::CommandLine::UserInterface::PLAYER_TYPES[1])
+  end
+
+  it 'user can select computer player' do
+    input.string = "2"
+    expect(interface.get_player_type('X')).to eq(TicTacToe::UI::CommandLine::UserInterface::PLAYER_TYPES[2])
+  end
+
+  it 'asks for input twice when user gives invalid input' do
+    input.string = "a\n1"
+    expect(interface.get_player_type('X')).to eq(TicTacToe::UI::CommandLine::UserInterface::PLAYER_TYPES[1])
+  end
+
+  it 'displays message to ask for player type' do
+    input.string = "1"
+    interface.get_player_type('X')
+    expect(output.string).to include(TicTacToe::UI::SELECT_PLAYER_TYPE % 'X')
+    TicTacToe::UI::CommandLine::UserInterface::PLAYER_TYPES.each do |option, player_type|
+      expect(output.string).to include(option.to_s)
+      expect(output.string).to include(player_type)
+    end
   end
 end

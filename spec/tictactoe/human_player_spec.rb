@@ -1,10 +1,10 @@
-require 'tictactoe/ui/command_line/human_player'
+require 'tictactoe/human_player'
 require 'tictactoe/board'
 require 'tictactoe/stubs/stub_interface'
 
-describe TicTacToe::UI::CommandLine::HumanPlayer do
+describe TicTacToe::HumanPlayer do
   let(:stub_interface) { TicTacToe::Stubs::StubInterface.new }
-  let(:human_player) { TicTacToe::UI::CommandLine::HumanPlayer.new('X', stub_interface) }
+  let(:human_player) { TicTacToe::HumanPlayer.new('X', stub_interface) }
   let(:board) { TicTacToe::Board.new }
 
   it 'gets move from user input' do

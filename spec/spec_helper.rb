@@ -1,4 +1,4 @@
-require 'tictactoe/ui/command_line/command_line_interface'
+require 'tictactoe/ui/command_line/user_interface'
 require 'tictactoe/game'
 
 RSpec.configure do |config|

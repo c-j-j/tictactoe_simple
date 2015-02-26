@@ -1,8 +1,18 @@
+require 'tictactoe/ui/command_line/user_interface'
+
 module TicTacToe
   module Stubs
     class StubInterface
       def prepare_user_moves(*moves)
         @moves = moves
+      end
+
+      def set_player_type(player_type)
+        @player_type = player_type
+      end
+
+      def get_player_type(mark)
+        @player_type or :human
       end
 
       def get_move
