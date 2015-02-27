@@ -1,9 +1,12 @@
+require 'spec_helper'
 require 'tictactoe/computer_player'
 require 'tictactoe/board'
 require 'tictactoe/helpers/board_helper.rb'
 require 'tictactoe/stubs/stub_player.rb'
 
 describe TicTacToe::ComputerPlayer do
+  include PlayerRoleTests
+
   let(:mark){'X'}
   let(:opponent_mark){'O'}
 
@@ -11,6 +14,10 @@ describe TicTacToe::ComputerPlayer do
   let(:board_helper) {TicTacToe::TestHelpers::BoardHelper.new }
   let(:opponent) {TicTacToe::Stubs::StubPlayer.new(opponent_mark)}
   let(:computer_player) { TicTacToe::ComputerPlayer.new(mark, opponent_mark) }
+
+  it 'responds to player methods' do
+    responds_to_player_methods?(computer_player)
+  end
 
   it 'has a mark' do
     expect(computer_player.mark).to be(mark)

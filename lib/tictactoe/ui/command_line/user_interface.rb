@@ -28,16 +28,9 @@ module TicTacToe
         def get_player_type(mark)
           print(SELECT_PLAYER_TYPE % mark)
           print_player_type_options
-
           while true
             user_input = input.gets.to_i
             return PLAYER_TYPES[user_input] if PLAYER_TYPES.has_key?(user_input)
-          end
-        end
-
-        def print_player_type_options
-          PLAYER_TYPES.each do |option, player_type|
-            print("#{option}: #{player_type}")
           end
         end
 
@@ -46,6 +39,12 @@ module TicTacToe
         end
 
         private
+
+        def print_player_type_options
+          PLAYER_TYPES.each do |option, player_type|
+            print("#{option}: #{player_type}")
+          end
+        end
 
         def print_board(board)
           index = MARK_OFFSET

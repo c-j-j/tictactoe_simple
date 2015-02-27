@@ -4,10 +4,15 @@ require 'tictactoe/helpers/game_helper'
 require 'tictactoe/ui/messages'
 
 describe TicTacToe::UI::CommandLine::UserInterface do
+  include UserInterfaceRoleTests
 
   let(:input) { StringIO.new }
   let(:output) { StringIO.new }
   let(:interface) { TicTacToe::UI::CommandLine::UserInterface.new(input, output)}
+
+  it 'responds to user interface methods' do
+    responds_to_user_interface_methods?(interface)
+  end
 
   it 'update displays next player to go when game in progress' do
     game = TicTacToe::TestHelpers::GameHelper.new_game

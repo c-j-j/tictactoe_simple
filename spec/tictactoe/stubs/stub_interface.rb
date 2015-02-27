@@ -3,6 +3,7 @@ require 'tictactoe/ui/command_line/user_interface'
 module TicTacToe
   module Stubs
     class StubInterface
+
       def prepare_user_moves(*moves)
         @moves = moves
       end
@@ -26,6 +27,7 @@ module TicTacToe
       def print_error_message(message)
         @error_message_printed = true
       end
+
     end
   end
 end
