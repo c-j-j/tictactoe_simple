@@ -29,11 +29,9 @@ module TicTacToe
       end
 
       scores = {}
-
       board.empty_positions.each do |empty_position|
-        new_board = create_new_board_with_move(board, current_player_mark, empty_position)
-        score = -negamax(new_board, find_next_player(current_player_mark), depth - 1, -beta, -alpha) .score
-
+        score = -negamax(create_new_board_with_move(board, current_player_mark, empty_position),
+                         find_next_player(current_player_mark), depth - 1, -beta, -alpha) .score
         alpha = [alpha, score].max
         scores[empty_position] = score
         break if alpha >= beta
